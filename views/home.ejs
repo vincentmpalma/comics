@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comics</title>
+</head>
+<body>
+  <h1>My Favorite Comics</h1>
+  <button>Add Comic</button>
+  <% for(site of sites){ %>
+
+  <div>
+    <h3><a href="#"><%= site.comicSiteName %></a></h2>
+    <h5><a href="#"><%= site.comicSiteUrl %></a></h4>
+  </div>
+  <br />
+
+  <%}%>
+
+  <div>
+    <h2 id="randomComicTitle"><%= random.comicTitle %></h2>
+    <img id="randomComicImg" src="<%= random.comicUrl %>" />
+    <br />
+    <button id="randomButton">Display Random Comic</button>
+  </div>
+
+</body>
+<script src="/js/home.js"></script> 
+</html>

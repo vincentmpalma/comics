@@ -22,9 +22,37 @@ const pool = mysql.createPool({
 });
 const conn = await pool.getConnection();
 
-//routes
-app.get('/', (req, res) => {
-   res.send('Hello Express app!')
+//root route goes to homepage
+app.get('/', async (req, res) => {
+
+  // database query to get all comic sites from the database
+  let sitesSQL = `SELECT * 
+                  FROM fe_comic_sites`
+  const [sites] = await conn.query(sitesSQL);
+
+  // database query to get a random comic to display
+  let randomSQL = `SELECT * 
+                  FROM fe_comics
+                  ORDER BY RAND()
+                  LIMIT 1`
+  let random = await conn.query(randomSQL);
+
+  console.log(random[0][0].comicUrl)
+
+   res.render('home', {sites, random:random[0][0]})
+});
+
+
+// api to send data of a random comic from the database
+app.get("/api/comics/random", async(req, res) => {
+
+  let randomSQL = `SELECT * 
+  FROM fe_comics
+  ORDER BY RAND()
+  LIMIT 1`
+  let random = await conn.query(randomSQL);
+
+  res.json(random[0])
 });
 
 app.get("/dbTest", async(req, res) => {
