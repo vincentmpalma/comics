@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comics - Site</title>
+</head>
+<body>
+  <h1><a href="<%= site.comicSiteUrl %>" target="_blank"><%= site.comicSiteName%></a></h1>
+
+
+    <% for (let comic of comics) { %>
+    <div>
+      <h3><%= comic.comicTitle %></a></h3>
+      <img src="<%= comic.comicUrl %>" />
+      <br />
+      <a href="#">Add Comments</a>
+      <br />
+      <a href="#">View Comments</a>
+    </div>
+    <br />
+    <% } %>
+
+
+</body>
+<script src="/js/home.js"></script> 
+</html>

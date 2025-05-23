@@ -42,6 +42,29 @@ app.get('/', async (req, res) => {
    res.render('home', {sites, random:random[0][0]})
 });
 
+app.get('/sites/:id', async (req, res) => {
+
+  let siteId = req.params.id
+
+  let siteSQL = `SELECT *
+                 FROM fe_comic_sites
+                 WHERE comicSiteId = ?`
+  let siteRows = await conn.query(siteSQL, [siteId]);
+
+  let comicsSQL = `SELECT *
+                   FROM fe_comics
+                   WHERE comicSiteId = ?`;
+  let comicRows = await conn.query(comicsSQL, [siteId]); 
+
+
+
+  for(let i = 0; i < comicRows[0].length; i++){
+    console.log(comicRows[0][i].comicTitle)
+  }
+
+  res.render("comics", {site:siteRows[0][0], comics:comicRows[0]})
+});
+
 
 // api to send data of a random comic from the database
 app.get("/api/comics/random", async(req, res) => {

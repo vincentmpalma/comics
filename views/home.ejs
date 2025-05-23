@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comics</title>
+  <title>Comics - Home</title>
 </head>
 <body>
-  <h1>My Favorite Comics</h1>
+  <h1>Comics</h1>
   <button>Add Comic</button>
   <% for(site of sites){ %>
 
   <div>
-    <h3><a href="#"><%= site.comicSiteName %></a></h2>
+    <h3><a href="/sites/<%= site.comicSiteId %>"><%= site.comicSiteName %></a></h3>
     <h5><a href="#"><%= site.comicSiteUrl %></a></h4>
   </div>
   <br />
