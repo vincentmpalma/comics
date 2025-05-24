@@ -37,8 +37,6 @@ app.get('/', async (req, res) => {
                   LIMIT 1`
   let random = await conn.query(randomSQL);
 
-  console.log(random[0][0].comicUrl)
-
    res.render('home', {sites, random:random[0][0]})
 });
 
@@ -56,12 +54,6 @@ app.get('/sites/:id', async (req, res) => {
                    WHERE comicSiteId = ?`;
   let comicRows = await conn.query(comicsSQL, [siteId]); 
 
-
-
-  for(let i = 0; i < comicRows[0].length; i++){
-    console.log(comicRows[0][i].comicTitle)
-  }
-
   res.render("comics", {site:siteRows[0][0], comics:comicRows[0]})
 });
 
@@ -74,6 +66,18 @@ app.get("/api/comics/random", async(req, res) => {
   ORDER BY RAND()
   LIMIT 1`
   let random = await conn.query(randomSQL);
+
+  res.json(random[0])
+});
+
+app.post("/comics", async(req, res) => {
+
+  const {url, title, site, date} = req.body;
+  
+  let comicSQL = `INSERT INTO fe_comics
+                  (comicUrl, comicTitle, comicSiteId, comicDate) 
+                  VALUES (?,?,?,?)`
+  let comicRes = await conn.query(comicSQL, [url, title, site, date]);
 
   res.json(random[0])
 });
