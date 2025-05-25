@@ -1,6 +1,9 @@
 // even listener(s)
 let randomButton = document.querySelector("#randomButton");
-randomButton. addEventListener("click", displayRandomComic);
+randomButton.addEventListener("click", displayRandomComic);
+
+let newComicForm = document.querySelector("#newComicForm");
+newComicForm.addEventListener("submit", addNewComic);
 
 // html elements to change
 let randomTitle = document.querySelector("#randomComicTitle");
@@ -18,4 +21,25 @@ async function displayRandomComic(){
   randomTitle.innerText = data[0].comicTitle
   randomImg.src = data[0] = data[0].comicUrl
 
+}
+
+async function addNewComic(e){
+  e.preventDefault();
+  alert("clicked");
+
+let newTitle = document.querySelector("#newTitle");
+let newUrl = document.querySelector("#newUrl");
+let newDate = document.querySelector("#newDate");
+let newSite = document.querySelector("#newSite");
+
+  console.log(`
+
+    ${newTitle.value}\n
+    ${newUrl.value}\n
+    ${newDate.value}\n
+    ${newSite.value}\n
+    
+    `)
+
+    
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
   <h1>Comics</h1>
-  <button>Add Comic</button>
+  <button id="addButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Comic</button>
   <% for(site of sites){ %>
 
   <div>
@@ -27,14 +27,10 @@
     <button id="randomButton">Display Random Comic</button>
   </div>
 
- <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
+    <form action="/comics" method="POST" id="newComicForm">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Add Comic</h1>
@@ -43,10 +39,9 @@
       <div class="modal-body">
         <h2>New Comic</h2>
         <br />
-        <form action="/comics" method="POST">
           <label>
           <h4>Title</h4>
-          <input name="title" type="text" />
+          <input name="title" type="text" id="newTitle" required  value="test title"/>
           </label>
 
           <br />
@@ -54,7 +49,7 @@
 
           <label>
           <h4>Url</h4>
-          <input name="url" type="url" />
+          <input name="url" id="newUrl" required value="test url"/>
           </label>
 
           <br />
@@ -62,7 +57,7 @@
 
           <label>
           <h4>Publish Date</h4>
-          <input name="date" type="date" />
+          <input name="date" id="newDate" value=2020-20-20 required/>
           </label>
 
           <br />
@@ -70,15 +65,19 @@
 
           <label>
           <h4>Website</h4>
-          <select name="site"></select>
+          <select name="site" id="newSite">
+            <option value="site value" selected>slect this</option>
+          </select>
           </label>
-        </form>
+       
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary" id="saveNewComic">Save changes</button>
       </div>
+       
     </div>
+    </form>
   </div>
 </div>
 
