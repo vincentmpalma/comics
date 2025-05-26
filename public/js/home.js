@@ -5,6 +5,8 @@ randomButton.addEventListener("click", displayRandomComic);
 let newComicForm = document.querySelector("#saveNewComic");
 newComicForm.addEventListener("click", addNewComic);
 
+let toastMessage = document.querySelector("#toastMesage");
+
 // Toast
 const toastTrigger = document.getElementById('liveToastBtn')
 const toastLiveExample = document.getElementById('liveToast')
@@ -52,11 +54,6 @@ let newUrl = document.querySelector("#newUrl").value;
 let newDate = document.querySelector("#newDate").value;
 let newSite = document.querySelector("#newSite").value;
 
-console.log(newTitle)
-console.log(newUrl)
-console.log(newDate)
-console.log(newSite)
-
   let response = await fetch('/api/comics', {
     method: 'POST',
     headers: {
@@ -71,14 +68,26 @@ console.log(newSite)
   });
 
   if(response.ok){
-    let data = await response.json();
-    console.log('Success:', data.message);
+
+    // let data = await response.json();
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+    toastMessage.innerText = "✅ Your comic was added successfully!"
     toastBootstrap.show()
+
+    let myModalEl = document.getElementById('exampleModal');
+    let modal = bootstrap.Modal.getInstance(myModalEl)
+    modal.hide();
+
   } else {
+
     console.error('Server error:', response.status);
     let errorData = await response.json(); 
     console.error('Error details:', errorData.message);
+    toastMessage.innerText = "❌ There was an error adding your comic."
+
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+    toastBootstrap.show()
+
   }
     
 }

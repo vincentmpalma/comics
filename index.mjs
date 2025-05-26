@@ -80,7 +80,7 @@ app.post("/api/comics", async(req, res) => {
     console.log(title)
     console.log(site)
     console.log(date)
-    
+        
     let comicSQL = `INSERT INTO fe_comics
                     (comicUrl, comicTitle, comicSiteId, comicDate) 
                     VALUES (?,?,?,?)`
