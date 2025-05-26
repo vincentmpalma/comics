@@ -21,6 +21,8 @@ const pool = mysql.createPool({
   waitForConnections: true
 });
 const conn = await pool.getConnection();
+app.use(express.json());
+
 
 //root route goes to homepage
 app.get('/', async (req, res) => {
@@ -70,16 +72,37 @@ app.get("/api/comics/random", async(req, res) => {
   res.json(random[0])
 });
 
-app.post("/comics", async(req, res) => {
+app.post("/api/comics", async(req, res) => {
 
-  const {url, title, site, date} = req.body;
-  
-  let comicSQL = `INSERT INTO fe_comics
-                  (comicUrl, comicTitle, comicSiteId, comicDate) 
-                  VALUES (?,?,?,?)`
-  let comicRes = await conn.query(comicSQL, [url, title, site, date]);
+  try{
+    const {url, title, site, date} = req.body;
+    console.log(url)
+    console.log(title)
+    console.log(site)
+    console.log(date)
+    
+    let comicSQL = `INSERT INTO fe_comics
+                    (comicUrl, comicTitle, comicSiteId, comicDate) 
+                    VALUES (?,?,?,?)`
+    let comicRes = await conn.query(comicSQL, [url, title, site, date]);
+    res.json({
+      success: true,
+      message: "Comic added successfully",
+    })
 
-  res.json(random[0])
+  } catch(error ){
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to add comic"
+    })
+  }
+
+  // res.json(random[0])
+
+
+
+
 });
 
 app.get("/dbTest", async(req, res) => {
