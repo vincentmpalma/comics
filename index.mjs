@@ -98,11 +98,18 @@ app.post("/api/comics", async(req, res) => {
     })
   }
 
-  // res.json(random[0])
+});
 
+// api to send data of a random comic from the database
+app.get("/api/comics/comments/:id", async(req, res) => {
+  let id = req.params.id
 
+  let commentsSQL = `SELECT * 
+  FROM fe_comments
+  WHERE comicId = ?`
+  let comments = await conn.query(commentsSQL, [id]);
 
-
+  res.json(comments[0])
 });
 
 app.get("/dbTest", async(req, res) => {
