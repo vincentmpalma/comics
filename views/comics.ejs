@@ -16,7 +16,7 @@
       <h3><%= comic.comicTitle %></a></h3>
       <img src="<%= comic.comicUrl %>" />
       <br />
-      <a href="#">Add Comments</a>
+      <a href="#" onclick="addComment('<%= comic.comicId %>')">Add Comments</a>
       <br />
       <a href="#" onclick="viewComments('<%= comic.comicId %>')">View Comments</a>
     </div>

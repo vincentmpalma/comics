@@ -112,6 +112,11 @@ app.get("/api/comics/comments/:id", async(req, res) => {
   res.json(comments[0])
 });
 
+app.post("/api/comics/comments", async(req, res) => {
+  // TODO
+
+});
+
 app.get("/dbTest", async(req, res) => {
     let sql = "SELECT CURDATE()";
     const [rows] = await conn.query(sql);
