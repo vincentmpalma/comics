@@ -113,7 +113,25 @@ app.get("/api/comics/comments/:id", async(req, res) => {
 });
 
 app.post("/api/comics/comments", async(req, res) => {
-  // TODO
+  
+  try{
+    const {author, email, comicId, comment} = req.body;
+    let commentSQL = `INSERT INTO fe_comments 
+                      (author, email, comment, comicId)
+                      VALUES (?,?,?,?)`
+    await conn.query(commentSQL, [author, email, comment, comicId]);
+    res.json({
+      success: true,
+      message: "Added comment successfully"
+    })
+} catch(e){
+  console.log(e)
+  res.status(500).json({
+    success: false,
+    message: "Failed to add comment"
+  })
+}
+
 
 });
 
