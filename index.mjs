@@ -102,13 +102,17 @@ app.post("/api/comics", async(req, res) => {
 
 // api to send data of a random comic from the database
 app.get("/api/comics/comments/:id", async(req, res) => {
+  console.log("in api backend")
   let id = req.params.id
+  console.log("id: ", id)
 
   let commentsSQL = `SELECT * 
   FROM fe_comments
   WHERE comicId = ?`
   let comments = await conn.query(commentsSQL, [id]);
 
+  console.log("comments: ")
+  console.log(comments[0][0])
   res.json(comments[0])
 });
 

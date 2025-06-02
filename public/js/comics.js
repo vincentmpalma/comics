@@ -1,3 +1,6 @@
+const exampleModal = document.getElementById('exampleModal')
+let viewCommentsDivBody = document.querySelector("#viewCommentsModal")
+
 async function viewComments(id){
 
 
@@ -8,7 +11,23 @@ async function viewComments(id){
   let data = await response.json();
 
 
+  console.log('frontend recieved: ', data)
   console.log('data: ', data)
+
+
+  viewCommentsDivBody.innerHTML = "" // fix this
+  for (let comment of data){
+    let content = document.createElement("h3");
+    content.innerText = comment.comment
+    let author = comment.author;
+    let email = comment.email;
+
+    viewCommentsDivBody.appendChild(content)
+    
+  }
+
+  let modal = new bootstrap.Modal(exampleModal);
+  modal.show();
 
 }
 
