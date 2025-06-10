@@ -16,7 +16,7 @@
       <h3><%= comic.comicTitle %></a></h3>
       <img src="<%= comic.comicUrl %>" />
       <br />
-      <a href="#" onclick="addComment('<%= comic.comicId %>')">Add Comments</a>
+      <a href="#" onclick="showAddModal('<%= comic.comicId %>')">Add Comment</a>
       <br />
       <a href="#" onclick="viewComments('<%= comic.comicId %>')">View Comments</a>
     </div>
@@ -42,6 +42,46 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<input id="addCommentId" value="" hidden />
+
+<!-- Add Comments Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addModalLabel">Add a Comment</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="addCommentsModal">
+        comment <input id="userComment"/>
+        email <input id="userEmail"/>
+        author <input id="author"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addComment()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Toast -->
+<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto" id="toastMesage"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   </div>
 </div>
