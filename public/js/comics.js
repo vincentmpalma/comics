@@ -14,6 +14,8 @@ if (toastTrigger) {
   })
 }
 
+let modal = new bootstrap.Modal(addModal);
+
 
 async function viewComments(id){
 
@@ -50,7 +52,7 @@ async function showAddModal(id){
   console.log("in addComent")
   console.log("id: ", id)
   document.querySelector("#addCommentId").value = id
-  let modal = new bootstrap.Modal(addModal);
+  // let modal = new bootstrap.Modal(addModal);
   modal.show();
 }
 
@@ -60,6 +62,14 @@ async function addComment(){
   let comicId = document.querySelector("#addCommentId").value
   let userEmail = document.querySelector("#userEmail").value
   let author = document.querySelector("#author").value
+
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+
+  if(!userComment || !userEmail || !author || userComment=="" || userEmail=="" || author==""){
+    toastMessage.innerText = "❌ Please fill out the whole form."
+    toastBootstrap.show()
+    return;
+  }
 
   console.log("in add comment")
   let response = await fetch(`/api/comics/comments`,{
@@ -76,9 +86,11 @@ async function addComment(){
   })
   let data = await response.json();
 
-  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  
   if(response.ok){
     toastMessage.innerText = "✅ Your comment was added successfully!"
+    modal.hide();
+    viewComments(comicId)
   } else {
     toastMessage.innerText = "❌ There was an error adding your comment."
   }

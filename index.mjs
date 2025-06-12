@@ -136,7 +136,10 @@ app.post("/api/comics/comments", async(req, res) => {
   })
 }
 
+});
 
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Hello, world!' });
 });
 
 app.get("/dbTest", async(req, res) => {
@@ -148,3 +151,5 @@ app.get("/dbTest", async(req, res) => {
 app.listen(3000, ()=>{
     console.log("Express server running")
 })
+
+export default app;
