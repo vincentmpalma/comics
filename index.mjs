@@ -98,9 +98,43 @@ app.post("/api/comics", async(req, res) => {
     })
   }
 
-  // res.json(random[0])
+});
 
+// api to send data of a random comic from the database
+app.get("/api/comics/comments/:id", async(req, res) => {
+  console.log("in api backend")
+  let id = req.params.id
+  console.log("id: ", id)
 
+  let commentsSQL = `SELECT * 
+  FROM fe_comments
+  WHERE comicId = ?`
+  let comments = await conn.query(commentsSQL, [id]);
+
+  console.log("comments: ")
+  console.log(comments[0][0])
+  res.json(comments[0])
+});
+
+app.post("/api/comics/comments", async(req, res) => {
+  
+  try{
+    const {author, email, comicId, comment} = req.body;
+    let commentSQL = `INSERT INTO fe_comments 
+                      (author, email, comment, comicId)
+                      VALUES (?,?,?,?)`
+    await conn.query(commentSQL, [author, email, comment, comicId]);
+    res.json({
+      success: true,
+      message: "Added comment successfully"
+    })
+} catch(e){
+  console.log(e)
+  res.status(500).json({
+    success: false,
+    message: "Failed to add comment"
+  })
+}
 
 
 });
