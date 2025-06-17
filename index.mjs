@@ -24,8 +24,16 @@ const conn = await pool.getConnection();
 app.use(express.json());
 
 
-//root route goes to homepage
+
 app.get('/', async (req, res) => {
+   res.render('index')
+});
+
+
+//root route goes to homepage
+app.get('/home', async (req, res) => {
+
+
 
   // database query to get all comic sites from the database
   let sitesSQL = `SELECT * 
