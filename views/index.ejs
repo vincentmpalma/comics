@@ -13,21 +13,28 @@
     <br />
     <br />
     Password: <input type="password" name="existingPassword">
+    <button>Sign In</button>
   </form>
 
   <h1>Sign Up</h1>
-    <form>
-      Email: <input type="text" name="newEmail">
+    <form id="signUpForm">
+      Email: <input type="text" id="newEmail">
       <br />
       <br />
-      Username: <input type="text" name="newUsername">
+      Username: <input type="text" id="newUsername">
       <br />
       <br />
-      Password: <input type="password" name="newPassword">
+      Password: <input type="password" id="newPassword">
       <br />
       <br />
-      Confirm Password: <input type="password" name="newConfirmPassword">
+      Confirm Password: <input type="password" id="newConfirmPassword">
+      <button type="submit">Sign Up</button>
   </form>
-  
+
+  <div id="emptyFieldsError"></div>
+  <div id="passwordMatchError"></div>
+
+
 </body>
+<script src="/js/index.js"></script> 
 </html>
