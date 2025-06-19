@@ -146,6 +146,31 @@ app.post("/api/comics/comments", async(req, res) => {
 
 });
 
+
+app.post("/api/users", async(req, res) => {
+
+  try{
+    const {username, email, password} = req.body;
+        
+    let userSQL = `INSERT INTO users
+                    (username, email, password) 
+                    VALUES (?,?,?)`
+    let userRes = await conn.query(userSQL, [username, email, password]);
+    res.json({
+      success: true,
+      message: "User added successfully",
+    })
+
+  } catch(error ){
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to add user"
+    })
+  }
+
+});
+
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello, world!' });
 });
