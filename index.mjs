@@ -24,6 +24,8 @@ const conn = await pool.getConnection();
 app.use(express.json());
 
 
+// test
+
 //root route goes to homepage
 app.get('/', async (req, res) => {
 
